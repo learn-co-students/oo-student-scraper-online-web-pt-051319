@@ -38,15 +38,20 @@ class Scraper
             student[:github] = link
           else
             student[:blog] = link      
-       
-
-    binding.pry
-        
-          
         end
       end
     end  
+
+    binding.pry
+  
+  
+  
+  
+  
   end
+
+
+
 
   # more.attr('href') => links
 end
