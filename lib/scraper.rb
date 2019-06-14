@@ -29,7 +29,7 @@ class Scraper
     doc.css(".social-icon-container").each do |item|
       item.css("a").each do |more|
         link = more.attr('href')
-        
+        # binding.pry
           if link.include?("twitter")
             student[:twitter] = link
           elsif link.include?("linkedin")
@@ -42,10 +42,12 @@ class Scraper
       end
     end  
 
-    binding.pry
+    # binding.pry
+    student[:profile_quote] = doc.css(".profile-quote").text if doc.css(".profile-quote").text
+    student[:bio] = doc.css(".description-holder")[0].text if doc.css(".description-holder")[0].text
   
   
-  
+     return student
   
   
   end
