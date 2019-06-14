@@ -43,10 +43,10 @@ class Scraper
     end  
 
     # binding.pry
-    student[:profile_quote] = doc.css(".profile-quote").text if doc.css(".profile-quote").text
-    student[:bio] = doc.css(".description-holder")[0].text if doc.css(".description-holder")[0].text
+    student[:profile_quote] = doc.css(".profile-quote").text.gsub("\\","") if doc.css(".profile-quote").text
+    student[:bio] = doc.css(".description-holder p").text if doc.css(".description-holder p").text
   
-  binding.pry
+  
      return student
   
   
