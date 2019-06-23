@@ -4,12 +4,38 @@ require 'pry'
 class Scraper
 
   def self.scrape_index_page(index_url)
-    
+    html = open(index_url)
+    doc = Nokogiri::HTML(html)
+    student_array = []
+    student_index = doc.css(".student-card")
+    student_index.each do |student|
+      student_array << {
+        :name => student.css("h4.student-name").text,
+        :location => student.css("p.student-location").text,
+        :profile_url => student.css("a").attribute("href").text
+      }
+    end
+    student_array
   end
 
   def self.scrape_profile_page(profile_url)
+    doc = Nokogiri::HTML(open(profile_url))
+    student_hash = {}
+    quote = doc.css(".profile-quote").text
+    bio = doc.css(".bio-block .description-holder p").text
+    social_media_root = doc.css(".social-icon-container")
+    social_media_root.each do |social_media|
+      url = social_media.css("a").attribute("href").value
+      if url.include?("twitter")
+        student_hash[:twitter] = url
+      elsif url.include?("linkedin")
+        student_hash[:linkedin] = url
+      elsif url.include?("github")
+        student_hash[:github] = url
+      binding.pry
+     #url.attribute("href").value
+   end
     
   end
 
 end
-
