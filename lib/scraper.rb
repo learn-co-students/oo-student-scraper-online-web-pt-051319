@@ -22,16 +22,16 @@ class Scraper
       html = File.read(profile_url)
         doc = Nokogiri::HTML(html)
         profile = {}
-              doc.css("div.vitals-container div.social-icon-container a").each do |profile|
+              doc.css("div.vitals-container div.social-icon-container a").each do |item|
               #  binding.pry
-                if profile.css("img").attr("src").value == "../assets/img/twitter-icon.png"
-                  profile[:twitter] = profile.attr("href")
-                elsif profile.css("img").attr("src").value == "../assets/img/linkedin-icon.png"
-                    profile[:linkedin] = profile.attr("href")
-                elsif profile.css("img").attr("src").value  == "../assets/img/github-icon.png"
-                    profile[:github] = profile.attr("href")
-                elsif profile.css("img").attr("src").value == "../assets/img/rss-icon.png"
-                    profile[:blog] = profile.attr("href")
+                if item.css("img").attr("src").value == "../assets/img/twitter-icon.png"
+                  profile[:twitter] = item.attr("href")
+                elsif item.css("img").attr("src").value == "../assets/img/linkedin-icon.png"
+                    profile[:linkedin] = item.attr("href")
+                elsif item.css("img").attr("src").value  == "../assets/img/github-icon.png"
+                    profile[:github] = item.attr("href")
+                elsif item.css("img").attr("src").value == "../assets/img/rss-icon.png"
+                    profile[:blog] = item.attr("href")
                     end 
                     end 
                     
@@ -39,6 +39,7 @@ class Scraper
                   profile[:bio] = doc.css("div.details-container div.description-holder p").text
 
                  profile
+                # binding.pry
        end
 
 
