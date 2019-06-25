@@ -30,7 +30,6 @@ class Scraper
                 elsif item.css("img").attr("src").value  == "../assets/img/github-icon.png"
                     profile[:github] = item.attr("href")
                 else
-                #if item.css("img").attr("src").value == "../assets/img/rss-icon.png"
                     profile[:blog] = item.attr("href")
                     end 
                     end 
