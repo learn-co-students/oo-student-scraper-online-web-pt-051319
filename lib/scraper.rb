@@ -22,23 +22,23 @@ class Scraper
       html = File.read(profile_url)
         doc = Nokogiri::HTML(html)
         profile = {}
-              doc.css("div.vitals-container div.social-icon-container").each do |profile|
-                binding.pry
-                if profile.css("div.social-icon-container a img").attribute("src").value == "../assets/img/twitter-icon.png"
-                  profile[:twitter] = profile.css("div.social-icon-container a").attribute("href").value
-                elsif profile.css("div.social-icon-container a img").attribute("src").value == "../assets/img/linkedin-icon.png"
-                    profile[:linkedin] = profile.css("div.social-icon-container a").attribute("href").value
-                elsif profile.css("div.social-icon-container a img").attribute("src").value == "../assets/img/github-icon.png"
-                    profile[:github] = profile.css("div.social-icon-container a").attribute("href").value
-                elsif profile.css("div.social-icon-container a img").attribute("src").value == "../assets/img/rss-icon.png"
-                    profile[:blog] = profile.css("div.social-icon-container a").attribute("href").value
+              doc.css("div.vitals-container div.social-icon-container a").each do |profile|
+              #  binding.pry
+                if profile.css("img").attr("src").value == "../assets/img/twitter-icon.png"
+                  profile[:twitter] = profile.attr("href")
+                elsif profile.css("img").attr("src").value == "../assets/img/linkedin-icon.png"
+                    profile[:linkedin] = profile.attr("href")
+                elsif profile.css("img").attr("src").value  == "../assets/img/github-icon.png"
+                    profile[:github] = profile.attr("href")
+                elsif profile.css("img").attr("src").value == "../assets/img/rss-icon.png"
+                    profile[:blog] = profile.attr("href")
                     end 
                     end 
+                    
                   profile[:profile_quote] = doc.css("div.vitals-container div.vitals-text-container div.profile-quote").text
                   profile[:bio] = doc.css("div.details-container div.description-holder p").text
 
                  profile
-             end
        end
 
 
