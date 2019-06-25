@@ -23,7 +23,6 @@ class Scraper
         doc = Nokogiri::HTML(html)
         profile = {}
               doc.css("div.vitals-container div.social-icon-container a").each do |item|
-              #  binding.pry
                 if item.css("img").attr("src").value == "../assets/img/twitter-icon.png"
                   profile[:twitter] = item.attr("href")
                 elsif item.css("img").attr("src").value == "../assets/img/linkedin-icon.png"
@@ -39,7 +38,6 @@ class Scraper
                   profile[:bio] = doc.css("div.details-container div.description-holder p").text
 
                  profile
-                # binding.pry
        end
 
 
